@@ -1,0 +1,12 @@
+# A sample Gemfile
+source "http://rubygems.org"
+
+gem "cucumber"
+gem "test-spec"
+gem "prawn"
+gem "rspec"
+gem "sequel"
+gem "sqlite3"
+gem "mysql2"
+#gem "mysql"
+
