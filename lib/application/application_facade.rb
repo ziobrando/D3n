@@ -1,11 +1,23 @@
 $:.unshift File.join(File.dirname(__FILE__), "../..", "lib")
 
+require "Singleton"
+require "application/configuration"
 require "domain/trainings/training_repository"
 
 class ApplicationFacade
 
+  include Singleton
+
+  def initialize
+    @configuration = Configuration.new
+  end
+
+  def db
+    @configuration.db
+  end
+
   def training_repository
-    TrainingRepository.instance
+    TrainingRepository.new db
   end
 
   def create_training(create_training_command)

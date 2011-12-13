@@ -24,15 +24,19 @@ class MockPublisherService
 end
 
 def application_facade
-  ApplicationFacade.new # TODO something like a singleton? Better Ideas?
+  ApplicationFacade.instance
 end
 
 def training_factory
   TrainingFactory.new
 end
 
+def db
+  Configuration.new.db
+end
+
 def training_repository
-  TrainingRepository.instance
+  TrainingRepository.new db
 end
 
 

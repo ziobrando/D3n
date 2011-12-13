@@ -5,8 +5,12 @@ require "rspec"
 require "domain/trainings/training_factory"
 require "domain/trainings/training_repository"
 
+def db
+  Configuration.new.db
+end
+
 def training_repository
-  TrainingRepository.instance
+  TrainingRepository.new db
 end
 
 describe "Saving a training" do

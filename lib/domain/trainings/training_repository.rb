@@ -3,20 +3,15 @@ require "Sequel"
 
 class TrainingRepository
 
-  attr_accessor :data
   attr_reader :training_factory
 
-  include Singleton
-
-  def initialize
-    #@DB = Sequel.sqlite # spostare!
-    #gem "mysql2"
-    @DB = Sequel.mysql2('D3N', :user => 'root', :password => '')
+  def initialize db
+    @db = db
     @training_factory = TrainingFactory.new
   end
 
   def trainings
-    @DB[:trainings]
+    @db[:trainings]
   end
 
 
