@@ -29,11 +29,13 @@ class ApplicationFacade
   end
 
   def publish_training(publish_training_command)
-    training = training_repository.find_by_id(db, publish_training_command.training_id)
-    puts "Training: " + training.to_s
-    training.publish(publish_training_command)
-    training_repository.save(db, training)
-    # TODO intercept returned event
+    db.transaction do
+      training = training_repository.find_by_id(db, publish_training_command.training_id)
+      puts "Training: " + training.to_s
+      training.publish(publish_training_command)
+      training_repository.save(db, training)
+      # TODO intercept returned event
+    end
   end
 
 
