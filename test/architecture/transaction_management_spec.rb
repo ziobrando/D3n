@@ -3,12 +3,12 @@ require "application/Application_Facade"
 require "commands/Create_Training"
 
 class ExplodingRepository
-  def initialize db
-    @real_repository = TrainingRepository.new db
+  def initialize
+    @real_repository = TrainingRepository.instance
   end
 
-  def save training
-    @real_repository.save training
+  def save db,training
+    @real_repository.save db,training
     raise Sequel::Rollback
   end
 
@@ -21,7 +21,7 @@ describe "transaction management" do
 
     class ApplicationFacade
       def training_repository
-        ExplodingRepository.new db
+        ExplodingRepository.new
       end
     end
     facade = ApplicationFacade.instance
@@ -29,7 +29,7 @@ describe "transaction management" do
 
     facade.create_training command
 
-    found = training_repository.find_unique_by_name(unwanted_name)
+    found = training_repository.find_unique_by_name(db, unwanted_name)
 
     found.nil?.should == true
   end
