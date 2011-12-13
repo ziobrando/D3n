@@ -23,7 +23,6 @@ class Training
   def publish publish_training_command
     outcome = @publishing_service.publish_on(self, publish_training_command.target_platform)
     @url = outcome.url
-    training_repository.save(self) # spostare
     outcome
   end
 

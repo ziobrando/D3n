@@ -36,7 +36,7 @@ def db
 end
 
 def training_repository
-  TrainingRepository.new db
+  TrainingRepository.instance
 end
 
 
@@ -51,14 +51,14 @@ When /^a Training (.*) not yet published$/ do |training_name|
 end
 
 When /^I publish Training (.*) on Catalog$/ do |training_name|
-  training = training_repository.find_unique_by_name training_name
+  training = training_repository.find_unique_by_name db, training_name
   publish_command = PublishTraining.new(training.id, "Target")
 
   application_facade.publish_training(publish_command)
 end
 
 Then /^Training (.*) is available on Catalog$/ do |training_name|
-  training = training_repository.find_unique_by_name training_name
+  training = training_repository.find_unique_by_name db, training_name
   training.is_available_on_catalog?.should == true
 end
 
@@ -77,7 +77,7 @@ When /^a user tells to create a Training with the given Name and Description$/ d
 end
 
 Then /^a Training named (.*) is available$/ do |training_name|
-  found = training_repository.find_unique_by_name(training_name)
+  found = training_repository.find_unique_by_name(db, training_name)
   found.should_not == nil
   found.class.should == Training
   puts "Found: #{found}"
@@ -88,7 +88,7 @@ Then /^the Training (.*) is given an Id$/ do |generic_training|
 end
 
 When /^the Training named (.*) can be retrieved via Id$/ do |training_name|
-  found_training_via_id = training_repository.find_by_id(@created_training.id)
+  found_training_via_id = training_repository.find_by_id(db, @created_training.id)
   found_training_via_id.should_not == nil
   found_training_via_id.class.should == Training
   found_training_via_id.name.should == training_name
