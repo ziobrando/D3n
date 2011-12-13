@@ -8,10 +8,11 @@ class Training
   attr_reader :url
   attr_accessor :publishing_service
 
-  def initialize (id, name, description)
+  def initialize (id, name, description, url)
     @id = id
     @name = name
     @description = description
+    @url = url
     @publishing_service = nil
   end
 

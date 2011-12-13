@@ -1,18 +1,21 @@
 # Wip
 - Cucumber Test Cleanup
 - Publishing
+-- Define semantics
+-- Define story
 
 # To Do
 * Transaction management
-* GitHub Project
 * Data management
 * Wiring explore DI in Ruby
 * Storing Events
 - Application Facade … should be a Singleton?
+- Publishing dates
 
 
 # Done
+-GitHub Project-
 -MySQL setup-
 -Cucumber setup-
-- -RSpec setup-
+-RSpec setup-
 -sequel setup-

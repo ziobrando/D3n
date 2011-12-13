@@ -43,7 +43,8 @@ class TrainingRepository
   def update(training)
     trainings.update(
         :name => training.name,
-        :description => training.description
+        :description => training.description,
+        :url => training.url
     )
     find_by_id training.id
   end
@@ -51,7 +52,8 @@ class TrainingRepository
   def insert training
     id = trainings.insert(
         :name => training.name,
-        :description => training.description
+        :description => training.description,
+        :url => training.url
     )
     find_by_id id
   end

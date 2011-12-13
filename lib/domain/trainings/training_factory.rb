@@ -12,21 +12,24 @@ class TrainingFactory
 
   def create_new_from_command(create_training)
     puts "Received command: #{create_training}"
-    training = Training.new(nil, create_training.name, create_training.description)
+    training = Training.new(nil, create_training.name, create_training.description, nil)
         inject_stuff(training)
     training
   end
 
   def create_from_map(map)
     training = Training.new(
-        map[:id], map[:name], map[:description]
+        map[:id],
+        map[:name],
+        map[:description],
+        map[:url]
     )
     inject_stuff(training)
     training
   end
 
   def create_new(name, description)
-    training = Training.new(nil, name, description)
+    training = Training.new(nil, name, description, nil)
     inject_stuff(training)
     training
   end

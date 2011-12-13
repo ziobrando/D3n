@@ -13,6 +13,7 @@ DB.create_table("trainings") do
   primary_key :id
   String :name
   String :description
+  String :url
 end
 puts "table trainings created?"
 trainings = DB[:trainings]
