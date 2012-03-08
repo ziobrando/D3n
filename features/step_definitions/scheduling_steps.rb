@@ -1,3 +1,5 @@
+$:.unshift File.join(File.dirname(__FILE__), "../..", "lib")
+
 require 'commands/plan_training_edition'
 require 'domain/training_edition/training_edition_repository'
 

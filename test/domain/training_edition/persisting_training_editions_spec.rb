@@ -67,7 +67,7 @@ describe "Training Edition persistence" do
     duration = 4
     date = Date.new 2012, 12, 20
     location = "somewhere"
-    url = "www.avanscoperta.it"
+    url = "www.training-D3N.it"
 
     edition = TrainingEdition.new nil, training_id, headline, date, location, duration, url
 

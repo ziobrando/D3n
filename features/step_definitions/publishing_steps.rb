@@ -17,10 +17,6 @@ class MockPublisherService
   def initialize
 
   end
-
-  def pubblica(corso, target)
-
-  end
 end
 
 def application_facade
@@ -41,12 +37,14 @@ end
 
 
 Given /^a Catalog$/ do
-  # Do I really need a Catalog?
+  # TODO Do I really need a Catalog?
 end
 
 When /^a Training (.*) not yet published$/ do |training_name|
   training_data = CreateTraining.new(training_name, "generic description", 2)
   @created_training = application_facade.create_training(training_data)
+  @created_training.id.nil?.should == false
+  @created_training.is_available_on_catalog?.should == false
   puts "Created training #{@created_training}"
 end
 

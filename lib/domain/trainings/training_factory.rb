@@ -1,5 +1,5 @@
 require 'domain/trainings/Training'
-
+require 'domain/trainings/publishing_service'
 
 class TrainingFactory
   def initialize
@@ -46,7 +46,7 @@ class TrainingFactory
   end
 
   private
-  def inject_stuff training
+  def inject_stuff (training)
     training.publishing_service = publishing_service
   end
 

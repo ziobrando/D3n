@@ -36,8 +36,8 @@ class TrainingEditionFactory
   end
 
   private
-  def inject_stuff training_edition
-    #training.publishing_service = publishing_service
+  def inject_stuff(training_edition)
+    # Nothing to do so far
   end
 
 end

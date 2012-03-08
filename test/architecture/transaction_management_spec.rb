@@ -1,3 +1,5 @@
+$:.unshift File.join(File.dirname(__FILE__), "../..", "lib")
+
 require "rspec"
 require "application/Application_Facade"
 require "commands/Create_Training"
@@ -7,7 +9,7 @@ class ExplodingRepository
     @real_repository = TrainingRepository.instance
   end
 
-  def save db, training
+  def save(db, training)
     @real_repository.save db, training
     raise Sequel::Rollback
   end
