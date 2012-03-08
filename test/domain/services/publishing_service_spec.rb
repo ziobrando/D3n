@@ -8,8 +8,8 @@ describe "Publish to an external service" do
 
   it "should return a training published event" do
     training_name = "My training"
-    training = TrainingFactory.new().create_new(training_name,"description")
-    command = PublishTraining.new "",""
+    training = TrainingFactory.new().create_new(training_name, "description", 3)
+    command = PublishTraining.new "", ""
     outcome = training.publish command
 
     outcome.should_not == nil
@@ -18,16 +18,16 @@ describe "Publish to an external service" do
 
   it "should contain training information" do
     training_name = "My training"
-    training = TrainingFactory.new().create_new(training_name,"description")
+    training = TrainingFactory.new().create_new(training_name, "description", 3)
 
     outcome = training.publish PublishTraining.new("Training", "Target")
 
-    outcome.training.name.should == training_name
+    outcome.training.headline.should == training_name
   end
 
-  it "should contain a timestamp"  do
+  it "should contain a timestamp" do
     training_name = "My training"
-    training = TrainingFactory.new().create_new(training_name,"description")
+    training = TrainingFactory.new().create_new(training_name, "description", 3)
 
     outcome = training.publish PublishTraining.new("Training", "Target")
 

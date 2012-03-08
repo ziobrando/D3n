@@ -1,27 +1,28 @@
-require 'domain/trainings/Publishing_service'
 
 class Training
 
   attr_accessor :id
-  attr_accessor :name
+  attr_accessor :headline
   attr_reader :description
+  attr_reader :duration
   attr_reader :url
   attr_accessor :publishing_service
 
-  def initialize (id, name, description, url)
+  def initialize (id, headline, description, duration, url)
     @id = id
-    @name = name
+    @headline = headline
     @description = description
+    @duration = duration
     @url = url
     @publishing_service = nil
   end
 
   def to_s
-    "Training: #{id} - #{name} - #{description}"
+    "Training: #{id} - #{headline} - #{description}"
   end
 
-  def publish publish_training_command
-    outcome = @publishing_service.publish_on(self, publish_training_command.target_platform)
+  def publish(command)
+    outcome = @publishing_service.publish_on(self, command.target_platform)
     @url = outcome.url
     outcome
   end

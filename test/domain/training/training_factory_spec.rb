@@ -8,14 +8,14 @@ end
 describe "creating a training" do
 
   it "should create a consistent training from scratch" do
-    training = training_factory.create_new("nome", "descrizione")
+    training = training_factory.create_new("nome", "descrizione", 3)
 
-    training.name.should == "nome"
+    training.headline.should == "nome"
     training.description.should == "descrizione"
   end
 
   it "should not have an id" do
-    training = training_factory.create_new("nome", "descrizione")
+    training = training_factory.create_new("nome", "descrizione", 5)
 
     training.id.nil?.should == true
   end

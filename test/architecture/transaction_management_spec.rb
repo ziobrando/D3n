@@ -7,8 +7,8 @@ class ExplodingRepository
     @real_repository = TrainingRepository.instance
   end
 
-  def save db,training
-    @real_repository.save db,training
+  def save db, training
+    @real_repository.save db, training
     raise Sequel::Rollback
   end
 
@@ -25,11 +25,11 @@ describe "transaction management" do
       end
     end
     facade = ApplicationFacade.instance
-    command = CreateTraining.new unwanted_name,"description"
+    command = CreateTraining.new unwanted_name, "description", 4
 
     facade.create_training command
 
-    found = training_repository.find_unique_by_name(db, unwanted_name)
+    found = training_repository.find_unique_by_headline(db, unwanted_name)
 
     found.nil?.should == true
   end

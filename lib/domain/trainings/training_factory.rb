@@ -12,20 +12,26 @@ class TrainingFactory
 
   def create_new_from_command(create_training)
     puts "Received command: #{create_training}"
-    training = Training.new(nil, create_training.name, create_training.description, nil)
+    training = Training.new(
+        nil,
+        create_training.name,
+        create_training.description,
+        create_training.duration,
+        nil)
     inject_stuff(training)
     training
   end
 
   def create_from_map(map)
-    if (map.nil?)
+    if map.nil?
       nil
     else
 
       training = Training.new(
           map[:id],
-          map[:name],
+          map[:headline],
           map[:description],
+          map[:duration],
           map[:url]
       )
       inject_stuff(training)
@@ -33,8 +39,8 @@ class TrainingFactory
     end
   end
 
-  def create_new(name, description)
-    training = Training.new(nil, name, description, nil)
+  def create_new(headline, description, duration)
+    training = Training.new(nil, headline, description, duration, nil)
     inject_stuff(training)
     training
   end

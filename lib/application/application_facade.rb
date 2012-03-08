@@ -1,6 +1,6 @@
 $:.unshift File.join(File.dirname(__FILE__), "../..", "lib")
 
-require "Singleton"
+require "singleton"
 require "application/configuration"
 require "domain/trainings/training_repository"
 
@@ -18,6 +18,10 @@ class ApplicationFacade
 
   def training_repository
     TrainingRepository.instance
+  end
+
+  def training_edition_factory
+    TrainingEditionFactory.new # TODO do we really need a Factory Class?
   end
 
   def create_training(create_training_command)
@@ -38,5 +42,11 @@ class ApplicationFacade
     end
   end
 
+  def plan_training_edition(plan_training_edition_command)
+    db.transaction do
+      training_edition = training_edition_factory.plan_training_edition(plan_training_edition_command)
+      training_edition_repository.save(db, training_edition)
 
+    end
+  end
 end

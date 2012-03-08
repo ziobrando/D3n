@@ -1,4 +1,4 @@
-require "Singleton"
+require "singleton"
 require "Sequel"
 
 class TrainingRepository
@@ -13,10 +13,10 @@ class TrainingRepository
   end
 
   def save(db, training)
-    if (training.id != nil)
-      update db, training
-    else
+    if training.id.nil?
       insert db, training
+    else
+      update db, training
     end
   end
 
@@ -27,26 +27,28 @@ class TrainingRepository
     training_factory.create_from_map found_map
   end
 
-  def find_unique_by_name(db, training_name)
+  def find_unique_by_headline(db, headline)
     trainings = db[:trainings]
-    found = trainings.first(:name => training_name)
+    found = trainings.first(:headline => headline)
     training_factory.create_from_map(found)
   end
 
   private
   def update(db, training)
     db[:trainings].update(
-        :name => training.name,
+        :headline => training.headline,
         :description => training.description,
+        :duration => training.duration,
         :url => training.url
     )
     find_by_id db, training.id
   end
 
-  def insert db, training
+  def insert(db, training)
     id = db[:trainings].insert(
-        :name => training.name,
+        :headline => training.headline,
         :description => training.description,
+        :duration => training.duration,
         :url => training.url
     )
     find_by_id db, id
